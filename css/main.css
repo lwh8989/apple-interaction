@@ -159,6 +159,10 @@ a {
 #show-scene-3 #scroll-section-3 .sticky-elem {
     display: block;
 }
+.main-message.active-0-a {
+    
+}
+
 
 @media (min-width:1024px) {
     #scroll-section-0 h1 {
