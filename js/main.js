@@ -48,6 +48,18 @@
             sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
             sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
         }
+
+        // currenScene 상시 적용되도록 설정
+        yOffset = window.pageYOffset;
+        let totalScrollHeight = 0;
+        for (let i = 0; i < sceneInfo.length; i++) {
+            totalScrollHeight += sceneInfo[i].scrollHeight;
+            if (totalScrollHeight >= yOffset) {
+                currentScene = i;
+                break; // 제어
+            }
+        }
+        document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
 
     
@@ -59,21 +71,23 @@
 
         if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
             currentScene++;
+            document.body.setAttribute('id', `show-scene-${currentScene}`); 
         }
 
         if (yOffset < prevScrollHeight) {
             if (currentScene === 0) retuen; // 브라우저 바운스 효과로 인해 마이너스가 되는 것을 방지(모바일)
             currentScene--;
+            document.body.setAttribute('id', `show-scene-${currentScene}`); 
         }
-
-        console.log(currentScene);
     }
 
-    window.addEventListener('resize', setLayout);
+    
     window.addEventListener('scroll', () => {
         yOffset = window.pageYOffset; // pageYOffset = page Y축 스크롤 읽을 수 있음
         scrollLoop();
     });
 
-    setLayout();
+    // window.addEventListener('DOMcontentLoaded', setLayout); DOMcontentLoaded = html 내에 태그들이 다운되면 바로 실행됨 이미지는 늦게 보여짐
+    window.addEventListener('load', setLayout); //load = html에서 이미지 텍스트들 모두 로드 된 다음 화면에 나옴
+    window.addEventListener('resize', setLayout);
 })();
