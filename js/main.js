@@ -12,13 +12,13 @@
             scrollHeight: 0,
             objs: {
                 container: document.querySelector('#scroll-section-0'),
-                massageA: document.querySelector('.main-message.active-0-a'),
-                massageB: document.querySelector('.main-message.active-0-b'),
-                massageC: document.querySelector('.main-message.active-0-c'),
-                massageD: document.querySelector('.main-message.active-0-d')
+                messageA: document.querySelector('#scroll-section-0 .main-message.active-0-a'),
+                messageB: document.querySelector('#scroll-section-0 .main-message.active-0-b'),
+                messageC: document.querySelector('#scroll-section-0 .main-message.active-0-c'),
+                messageD: document.querySelector('#scroll-section-0 .main-message.active-0-d')
             },
             value: {
-                massageA_opacity: [0, 1]
+                messageA_opacity: [0, 1]
             }
         }, 
         {
@@ -68,28 +68,37 @@
         }
         document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
+
+    function calcValues(values, currentYOffset) {
+
+    }
     
     function playAnimation() {
+        const objs = sceneInfo[currentScene].objs;
+        const values = sceneInfo[currentScene].values;
+        const currentYOffset = yOffset - prevScrollHeight;
+    
         switch (currentScene) {
-            case 0 :
-                console.log('0 play');
+            case 0:                
+                //console.log('0 play');
+                let messageA_opacity_0 = values.messageA_opacity[0];
+                let messageA_opacity_1 = values.messageA_opacity[1];
+                console.log( calcValues(values.messageA_opacity, currentYOffset) );
                 break;
-
-            case 1 :
-                console.log('1 play');
+            case 1:
+                // console.log('1 play');
                 break;
-
-            case 2 :
-                console.log('2 play');
+    
+            case 2:
+                // console.log('2 play');
                 break;
                 
-            case 3 :
-                console.log('3 play');
+            case 3:
+                // console.log('3 play');
                 break;
         }
     }
 
-    
     function scrollLoop() {
         prevScrollHeight = 0;
         for (let i = 0; i < currentScene; i++) {
