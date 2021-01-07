@@ -17,14 +17,14 @@
                 messageC: document.querySelector('#scroll-section-0 .main-message.active-0-c'),
                 messageD: document.querySelector('#scroll-section-0 .main-message.active-0-d')
             },
-            value: {
+            values: {
                 messageA_opacity: [0, 1]
             }
         }, 
         {
             // 1
             type: 'normal',
-            heightNum: 5, // 브라우저 높이의 5배로 scrollHeight 세팅
+            heightNum: 5,
             scrollHeight: 0,
             objs: {
                 container: document.querySelector('#scroll-section-1')
@@ -33,7 +33,7 @@
         {
             // 2
             type: 'sticky',
-            heightNum: 5, // 브라우저 높이의 5배로 scrollHeight 세팅
+            heightNum: 5,
             scrollHeight: 0,
             objs: {
                 container: document.querySelector('#scroll-section-2')
@@ -42,7 +42,7 @@
         {
             // 3
             type: 'sticky',
-            heightNum: 5, // 브라우저 높이의 5배로 scrollHeight 세팅
+            heightNum: 5,
             scrollHeight: 0,
             objs: {
                 container: document.querySelector('#scroll-section-3')
@@ -58,6 +58,7 @@
 
         // currenScene 상시 적용되도록 설정
         yOffset = window.pageYOffset;
+
         let totalScrollHeight = 0;
         for (let i = 0; i < sceneInfo.length; i++) {
             totalScrollHeight += sceneInfo[i].scrollHeight;
@@ -70,7 +71,13 @@
     }
 
     function calcValues(values, currentYOffset) {
+        let rv;
+        // 연재 씬(스크롤섹션)에서 스크롤된 범위를 비율로 구하기
+        let scrollRatio = currentYOffset / sceneInfo[currentScene].scrollHeight;
 
+        rv = scrollRatio * (values[1] - values[0]) + values[0];
+
+        return rv;
     }
     
     function playAnimation() {
@@ -81,10 +88,10 @@
         switch (currentScene) {
             case 0:                
                 //console.log('0 play');
-                let messageA_opacity_0 = values.messageA_opacity[0];
-                let messageA_opacity_1 = values.messageA_opacity[1];
-                console.log( calcValues(values.messageA_opacity, currentYOffset) );
+                let messageA_opacity_in = calcValues(values.messageA_opacity, currentYOffset);
+                objs.messageA.style.opacity = messageA_opacity_in;
                 break;
+                
             case 1:
                 // console.log('1 play');
                 break;
