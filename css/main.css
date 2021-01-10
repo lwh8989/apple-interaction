@@ -115,7 +115,15 @@ a {
 .pin {
     width: 1px;
     height: 100px;
-    color: rgb(29, 29, 31);
+    background-color: rgb(29, 29, 31);
+}
+#scroll-section-2 .active-2-b {
+    top: 10%;
+    left: 40%;
+}
+#scroll-section-2 .active-2-c {
+    top: 15%;
+    left: 45%;
 }
 
 /* section-3 */
@@ -181,6 +189,13 @@ a {
     }
     #scroll-section-2 .main-message {
         font-size: 6vw;
+    }
+    #scroll-section-2 .active-2-b {
+        top: 20%;
+        left: 53%;
+    }
+    #scroll-section-2 .active-2-c {
+        left: 55%;
     }
     .main-message small { 
         font-size: 1.5vw;
